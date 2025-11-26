@@ -1,0 +1,180 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Para Mi Puki 😽💗</title>
+<style>
+ body {
+   margin: 0;
+   padding: 0;
+   overflow: hidden;
+   background: #ffdde8;
+   font-family: 'Arial', sans-serif;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+   text-align: center;
+   position: relative;
+ }
+ #card {
+   background: white;
+   padding: 25px;
+   border-radius: 20px;
+   width: 90%;
+   max-width: 450px;
+   box-shadow: 0px 0px 20px rgba(255,0,80,0.3);
+   animation: aparecer 0.6s ease;
+ }
+ @keyframes aparecer {
+   from { opacity: 0; transform: scale(0.8); }
+   to { opacity: 1; transform: scale(1); }
+ }
+ button {
+   background: #ff4d79;
+   color: white;
+   border: none;
+   padding: 12px 22px;
+   font-size: 18px;
+   border-radius: 12px;
+   margin: 10px;
+   cursor: pointer;
+   transition: 0.2s;
+ }
+ button:hover {
+   background: #ff335f;
+ }
+ .corazon {
+   position: absolute;
+   color: rgba(255,0,80,0.4);
+   font-size: 24px;
+   animation: flotar 6s linear infinite;
+ }
+ @keyframes flotar {
+   0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
+   20% {opacity: 1;}
+   100% { transform: translateY(-10vh) scale(1.4); opacity: 0;} 
+ }
+</style>
+</head>
+<body>
+<script>
+// --- Generar corazones flotantes ---
+function crearCorazones() {
+  for (let i = 0; i < 25; i++) {
+    let c = document.createElement('div');
+    c.className = 'corazon';
+    c.innerHTML = '❤';
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.animationDuration = 4 + Math.random() * 4 + 's';
+    c.style.fontSize = 20 + Math.random() * 20 + 'px';
+    document.body.appendChild(c);
+  }
+}
+crearCorazones();
+
+// --- Las 20 preguntas ---
+const preguntas = [
+  "¿Me amas, Mi Puki hermosa?",
+  "¿Pensás en mí antes de dormir?",
+  "¿Soy importante para vos?",
+  "¿Te hago feliz?",
+  "¿Te gusta estar conmigo?",
+  "¿Te gusta cómo te cuido?",
+  "¿Te gusta cómo te miro?",
+  "¿Te gusta cómo te hablo?",
+  "¿Me extrañás cuando no estoy?",
+  "¿Te gusta que te abrace?",
+  "¿Querés quedarte conmigo siempre?",
+  "¿Siento bonito en tu corazón?",
+  "¿Te hago sentir especial?",
+  "¿Confías en mí?",
+  "¿Pensás en un futuro conmigo?",
+  "¿Te gusta cuando soy cariñoso?",
+  "¿Te gusta cuando te digo cosas lindas?",
+  "¿Te gusta cuando te llamo Mi Puki?",
+  "¿Soy tu persona favorita?",
+  "¿Me elegirías otra vez?"
+];
+
+// --- Insistencias sin mencionar la pregunta ---
+function generarInsistencias() {
+  let frases = [];
+  for (let i = 0; i < 20; i++) {
+    frases.push(
+      [
+        "Ay mi amorcito, dale sí 😿💗", "No seas mala mi cielo, presiona que sí 😽",
+        "Mi vida hermosa, sé buena conmigo 😿", "Mi corazón precioso, decime que sí 🥺💘",
+        "Mi niña linda, dale sí que me pongo triste 😿", "Mi cielo tierno, no me digas que no 😭💗",
+        "Mi amorcito dulce, dale sí que te adoro 😻", "Mi tesoro lindo, no me rompas el corazón 😿",
+        "Mi luz hermosa, presiona sí porfi 😽💗", "Mi chiquita bella, decime que sí 😭💞",
+        "Mi hermosa, dale que sí que me muero de amor 😿", "Mi vida, no me digas que no 😭",
+        "Mi muñequita hermosa, presiona sí 😽💝", "Mi dulzura, dale sí que te amo un montón 😻",
+        "Mi estrella linda, presiona sí amorcito 💗", "Mi cielo, no me castigues con un no 😿",
+        "Mi ternurita hermosa, dale sí 🥺💗", "Mi amor, solo presiona sí y te beso 😽",
+        "Mi reina preciosa, dale sí porfi 🥺💘", "Mi pequeña hermosa, no me dejes así 😿💗"
+      ][Math.floor(Math.random() * 20)]
+    );
+  }
+  return frases;
+}
+
+// --- Mensajes románticos únicos
+function mensajeSiAleatorio() {
+  const opciones = [
+    "Te amo muchísimo, mi amor lindo 💗🥺", "Sos todo para mí, mi vida hermosa 😻💞",
+    "Mi corazón es tuyo siempre, amorcito 💕", "Gracias por decir que sí, mi cielo precioso 😽💗",
+    "Sos lo mejor que tengo, mi niña hermosa ❤️",
+    "Te adoro con toda mi alma, mi tesoro 💘",
+    "Sos mi felicidad entera, mi amor tierno 💗"
+  ];
+  return opciones[Math.floor(Math.random() * opciones.length)];
+}
+
+let indice = 0;
+let insistencias = generarInsistencias();
+
+// --- Crear tarjeta de contenido ---
+let card = document.createElement("div");
+card.id = "card";
+document.body.appendChild(card);
+
+function mostrarPregunta() {
+  card.innerHTML = `
+    <h2>${preguntas[indice]}</h2>
+    <button onclick="respuestaSi()">Sí 💗</button>
+    <button onclick="respuestaNo()">No 😿</button>
+  `;
+}
+
+function respuestaNo() {
+  let frase = insistencias[Math.floor(Math.random()*insistencias.length)];
+  card.innerHTML = `
+    <h3>${frase}</h3>
+    <button onclick="mostrarPregunta()">Volver</button>
+  `;
+}
+
+function respuestaSi() {
+  let mensaje = mensajeSiAleatorio();
+  card.innerHTML = `
+    <h3>${mensaje}</h3>
+    <button onclick="continuar()">Continuar ❤️</button>
+  `;
+}
+
+function continuar() {
+  indice++;
+  if (indice >= preguntas.length) {
+    card.innerHTML = `<h2>Te amo muchísimo, mi amor hermoso ❤️‍🩹💗</h2>`;
+    return;
+  }
+  insistencias = generarInsistencias();
+  mostrarPregunta();
+}
+
+mostrarPregunta();
+</script>
+</body>
+</html>
